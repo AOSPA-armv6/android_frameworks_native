@@ -23,6 +23,7 @@ LOCAL_SRC_FILES:= \
 	GraphicBufferMapper.cpp \
 	PixelFormat.cpp \
 	Rect.cpp \
+        Overlay.cpp \
 	Region.cpp \
 	UiConfig.cpp
 
