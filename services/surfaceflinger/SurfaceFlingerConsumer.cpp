@@ -73,15 +73,7 @@ status_t SurfaceFlingerConsumer::updateTexImage(BufferRejecter* rejecter)
         return err;
     }
 
-
-    // We call the rejecter here, in case the caller has a reason to
-    // not accept this buffer.  This is used by SurfaceFlinger to
-    // reject buffers which have the wrong size
     int buf = item.mBuf;
-    if (rejecter && rejecter->reject(mSlots[buf].mGraphicBuffer, item)) {
-        releaseBufferLocked(buf, mSlots[buf].mGraphicBuffer, EGL_NO_SYNC_KHR);
-        return NO_ERROR;
-    }
 
 #ifdef DECIDE_TEXTURE_TARGET
     // GPU is not efficient in handling GL_TEXTURE_EXTERNAL_OES
@@ -104,6 +96,14 @@ status_t SurfaceFlingerConsumer::updateTexImage(BufferRejecter* rejecter)
         }
     }
 #endif
+
+    // We call the rejecter here, in case the caller has a reason to
+    // not accept this buffer.  This is used by SurfaceFlinger to
+    // reject buffers which have the wrong size
+    if (rejecter && rejecter->reject(mSlots[buf].mGraphicBuffer, item)) {
+        releaseBufferLocked(buf, mSlots[buf].mGraphicBuffer, EGL_NO_SYNC_KHR);
+        return NO_ERROR;
+    }
 
     // Release the previous buffer.
     err = updateAndReleaseLocked(item);
