@@ -32,7 +32,7 @@ static pthread_key_t sTLSKey = -1;
 static pthread_once_t sPthreadOnceKey = PTHREAD_ONCE_INIT;
 
 void createTLSKey() {
-    pthread_key_create(&sTLSKey, (void (*)(void*))&releaseContext);
+    pthread_key_create(&sTLSKey, NULL);
 }
 
 GLTraceContext *getGLTraceContext() {
