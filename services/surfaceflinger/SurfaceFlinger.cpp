@@ -168,7 +168,7 @@ SurfaceFlinger::SurfaceFlinger()
     // debugging stuff...
     char value[PROPERTY_VALUE_MAX];
 
-    property_get("persist.sys.prefer_16bpp", value, "1");
+    property_get("persist.sys.prefer_16bpp", value, "0");
     mPrefer16bpp = atoi(value);
 
     property_get("ro.bq.gpu_to_cpu_unsupported", value, "0");
