@@ -26,9 +26,6 @@ LOCAL_SHARED_LIBRARIES := libcutils libutils liblog libstlport
 
 ifeq ($(ARCH_ARM_HAVE_TLS_REGISTER),true)
     LOCAL_CFLAGS += -DHAVE_ARM_TLS_REGISTER
-    ifeq ($(TARGET_ARCH_VARIANT),armv6-vfp)
-        LOCAL_ARM_MODE := arm
-    endif
 endif
 
 LOCAL_CFLAGS += -DLOG_TAG=\"libGLES_trace\"
